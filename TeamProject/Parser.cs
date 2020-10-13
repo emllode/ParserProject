@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
 
@@ -17,6 +18,7 @@ namespace TeamProject
     public static class Parser
 
     {
+
         public static string PrettyParse(string text) //Kopierad från Björns lektion, oklart om denna behövs egentligen?
         {
             return $"{text} = {Parse(text)}";
@@ -41,33 +43,68 @@ namespace TeamProject
             }
         }       
         
-        class Operator : Token
-        {
-            public Operator(string text) : base(text) { }
-        }
-
-        // Började bygga på en switch statement för siffror i token classen, men troligtvis behöver jag skapa en ny class som jag gör för operatorn. Sparar den här tillsvidare.
-        /*public static bool IsToken(string text) //Tänker att jag skapar en switch där vi går genom 1 - 10 sen 
-        {
-            switch (text)
+        class Operator : Token  //Vill få ut plus och minus o så fall låta de vara kvar.
+        {   
+            public  Operator(string text) : base(text) { }
+            
+            public bool OperatorFigureOut(string text) //Switch statement för att kunna slänga in flera cases om ifall den skall utvecklas.
             {
-                case "one":
-                    value = 1;
-                    break;
-                case "two":
-                case "three":
-                case "four":
-                case "five":
-                case "six":
-                case "seven":
-                case "eight":
-                case "nine":
-                case "ten":
-                    return true;
-                default:
-                    return false;
+                switch (text)
+                {
+                    case "plus":
+                    case "minus":
+                        return true;
+                    default:
+                        return false;
+
+                }
             }
-        */
+
+            class Value : Token //Går genom 1 - 10 och ändrar om från string till nummer.
+            {
+                public double value;
+
+                public Value(string text) : base(text)
+                {
+                    switch(text)
+                    {
+                        case "one":
+                            value = 1;
+                            break;
+                        case "two":
+                            value = 2;
+                            break;
+                        case "three":
+                            value = 3;
+                            break;
+                        case "four":
+                            value = 4;
+                            break;
+                        case "five":
+                            value = 5;
+                            break;
+                        case "six":
+                            value = 6;
+                            break;
+                        case "seven":
+                            value = 7;
+                            break;
+                        case "eight":
+                            value = 8;
+                            break;
+                        case "nine":
+                            value = 9;
+                            break;
+                        case "ten":
+                            value = 10;
+                            break;
+
+                        default:
+                            throw new Exception();
+                    }
+                }
+            }        
         }
     }
 }
+
