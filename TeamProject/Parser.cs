@@ -18,7 +18,13 @@ namespace TeamProject
 {
     public static class Parser
     {
-        public static double Parse(string text) 
+        public static string PrettyParse(string text) //Ger ut lite resultat på consolen
+        {
+            return $"{text} = {Parse(text)}";
+        }
+
+    
+        public static double Parse(string text)
         {
 
             var tokens = new List<Token>();
@@ -26,26 +32,22 @@ namespace TeamProject
             {
                 if (Operator.OperatorFigureOut(word))
                     tokens.Add(new Operator(word));
-               else
+                else
                     tokens.Add(new Value(word));
             }
 
-            for(int i = 1; i < tokens.Count; i++)
+            for (int i = 1; i < tokens.Count; i++)
             {
                 Token First = tokens[0]; //första loop ger första value (först
                 Token Second = tokens[1]; //skall vara operatör (andra loop)
                 Token third = tokens[2]; //value (tredje loop)
 
-                if(First is Value && Second is Operator && third is Value)
+                if (First is Value && Second is Operator && third is Value)
                 {
-                    Console.WriteLine("summan är: " );
-                    
+                    //Behöver lösa så att summan fixas.
+
                 }
 
-                else
-                {
-                    Console.WriteLine("Please write something as following: two plus two. \nYou can choose between 1 - 10 and plus and minus as your operator.");
-                }
             }
             return 0;
         }
@@ -60,13 +62,13 @@ namespace TeamProject
             {
                 token = text;
             }
-        }       
-        
+        }
+
         class Operator : Token  //Får ut plus samt minus från token.
         {
             public Token First, Third;
             public Operator(string text) : base(text) { }
-            
+
             public static bool OperatorFigureOut(string text) //Switch statement för att kunna slänga in flera cases om ifall den skall utvecklas.
             {
                 switch (text)
@@ -83,45 +85,46 @@ namespace TeamProject
         }
         class Value : Token //Går genom 1 - 10 och ändrar om från string till nummer i token.
         {
-                public double value;
+            public double value;
 
-                public Value(string text) : base(text)
+            public Value(string text) : base(text)
+            {
+                switch (text)
                 {
-                    switch(text)
-                    {
-                        case "one":
-                            value = 1;
-                            break;
-                        case "two":
-                            value = 2;
-                            break;
-                        case "three":
-                            value = 3;
-                            break;
-                        case "four":
-                            value = 4;
-                            break;
-                        case "five":
-                            value = 5;
-                            break;
-                        case "six":
-                            value = 6;
-                            break;
-                        case "seven":
-                            value = 7;
-                            break;
-                        case "eight":
-                            value = 8;
-                            break;
-                        case "nine":
-                            value = 9;
-                            break;
-                        case "ten":
-                            value = 10;
-                            break;              
-                    }
+                    case "one":
+                        value = 1;
+                        break;
+                    case "two":
+                        value = 2;
+                        break;
+                    case "three":
+                        value = 3;
+                        break;
+                    case "four":
+                        value = 4;
+                        break;
+                    case "five":
+                        value = 5;
+                        break;
+                    case "six":
+                        value = 6;
+                        break;
+                    case "seven":
+                        value = 7;
+                        break;
+                    case "eight":
+                        value = 8;
+                        break;
+                    case "nine":
+                        value = 9;
+                        break;
+                    case "ten":
+                        value = 10;
+                        break;
                 }
-        }    
+            }
+        }
     }
 }
+
 
