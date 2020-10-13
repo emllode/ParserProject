@@ -15,7 +15,7 @@ namespace TeamProject
  * */
 {
     public static class Parser
-        
+
     {
         public static string PrettyParse(string text) //Kopierad från Björns lektion, oklart om denna behövs egentligen?
         {
@@ -29,8 +29,9 @@ namespace TeamProject
         }
 
 
-        // Gör klass för token vilket är varje ord i en string. Därefter behöver vi även göra så operatörerna plockas ut i token. Antagligen genom inheritance.
+        // Gör klass för token vilket är varje ord i en string. Därefter behöver vi även göra sub-klasser för både operatören samt siffrorna/values. - > Inheritance (OOP)
         // Behöver även skapa en loop som går genom stringen för att få ut varje token, lättast är nog split function med parse strings. (Behövs googla/youtuba)
+
         class Token
         {
             string token;
@@ -38,6 +39,35 @@ namespace TeamProject
             {
                 token = text;
             }
+        }       
+        
+        class Operator : Token
+        {
+            public Operator(string text) : base(text) { }
+        }
+
+        // Började bygga på en switch statement för siffror i token classen, men troligtvis behöver jag skapa en ny class som jag gör för operatorn. Sparar den här tillsvidare.
+        /*public static bool IsToken(string text) //Tänker att jag skapar en switch där vi går genom 1 - 10 sen 
+        {
+            switch (text)
+            {
+                case "one":
+                    value = 1;
+                    break;
+                case "two":
+                case "three":
+                case "four":
+                case "five":
+                case "six":
+                case "seven":
+                case "eight":
+                case "nine":
+                case "ten":
+                    return true;
+                default:
+                    return false;
+            }
+        */
         }
     }
 }
