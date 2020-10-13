@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.ExceptionServices;
 using System.Text;
 
 namespace TeamProject
@@ -9,25 +10,50 @@ namespace TeamProject
 
 /* TODO 
  * Få en string input T.ex: "two plus two" och översätta till både integers samt operator och sedan skriva ut vad summan blir.
- * - Vi behöver bryta isär stringen i Tokens, där varje token är ett ord/siffra i stringen.
- * - Få datorn att förstå att + och - är operatörer och resten är sifffror/values.
- * -  Lägg ihop Tokens och få ut ett svar T.ex: "two plus two" och svaret i console blir: " 4 " 
- * Skapa UnitTests som ger "godkänt" när man har lyckats fixa ihop tillräcklig med kod för att få det att fungera.
+ * - Vi behöver bryta isär stringen i Tokens, där varje token är ett ord/siffra i stringen.  ---- > CHECK
+ * - Få datorn att förstå att + och - är operatörer och resten är sifffror/values.  ---- > 
+ * -  Lägg ihop Tokens och få ut ett svar T.ex: "two plus two" och svaret i console blir: " 4 "   ---- > 
+ * Skapa UnitTests som ger "godkänt" när man har lyckats fixa ihop tillräcklig med kod för att få det att fungera.  ---- > 
  * */
 {
     public static class Parser
 
     {
 
-        public static string PrettyParse(string text) //Kopierad från Björns lektion, oklart om denna behövs egentligen?
-        {
-            return $"{text} = {Parse(text)}";
-        }
-
-
         public static double Parse(string text) //Startar med att skapa en metod som returnerar 0, sedan skapar vi X antal tests och startar kodningen därefter.
         {
-            return 0;
+             //return 0; //används för få metoden att funka.
+
+
+            var tokens = new List<Token>();
+            foreach (var word in text.Split(" "))
+            {
+                if (Operator.OperatorFigureOut(word))
+                    tokens.Add(new Operator(word));
+                else
+                    tokens.Add(new Value(word));
+            }
+
+            for(int i = 1; i < tokens.Count; i++)
+            {
+                Token First = tokens[0]; //första loop ger första value (första loop)
+                Token Second = tokens[1]; //skall vara operatör (andra loop)
+                Token third = tokens[2]; //value (tredje loop)
+
+                if(First is Value && Second is Operator && third is Value)
+                {
+                  // Kan man lägga ihop det redan här? :/ 
+                }
+
+                else
+                {
+                    Console.WriteLine("Please write something as following: two plus two. \nYou can choose between 1 - 10 and plus and minus as your operator.");
+                }
+            }
+
+
+
+
         }
 
 
@@ -43,11 +69,11 @@ namespace TeamProject
             }
         }       
         
-        class Operator : Token  //Vill få ut plus och minus o så fall låta de vara kvar.
+        class Operator : Token  //Får ut plus samt minus från token.
         {   
-            public  Operator(string text) : base(text) { }
+            public Operator(string text) : base(text) { }
             
-            public bool OperatorFigureOut(string text) //Switch statement för att kunna slänga in flera cases om ifall den skall utvecklas.
+            public static bool OperatorFigureOut(string text) //Switch statement för att kunna slänga in flera cases om ifall den skall utvecklas.
             {
                 switch (text)
                 {
@@ -60,7 +86,8 @@ namespace TeamProject
                 }
             }
 
-            class Value : Token //Går genom 1 - 10 och ändrar om från string till nummer.
+        }
+        class Value : Token //Går genom 1 - 10 och ändrar om från string till nummer i token.
             {
                 public double value;
 
@@ -97,14 +124,11 @@ namespace TeamProject
                             break;
                         case "ten":
                             value = 10;
-                            break;
-
-                        default:
-                            throw new Exception();
+                            break;              
                     }
                 }
             }        
-        }
+       
     }
 }
 
