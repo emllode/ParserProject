@@ -57,7 +57,7 @@ namespace TeamProject
                     if (token is Operator)
                     {
                         Operator op = token as Operator;
-                        result += op.Calculate();
+                        result = op.Calculate();
                     }
 
                 }
@@ -100,7 +100,7 @@ namespace TeamProject
                 }
                 else if (token == "minus")
                 {
-                    return (First as Value).value - (Third as Value).value;
+                    return (First as Value).value + (Third as Value).value;
                 }
                 else
                    return 0;
