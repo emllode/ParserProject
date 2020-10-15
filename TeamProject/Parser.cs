@@ -13,8 +13,8 @@ namespace TeamProject
  * - Vi behöver bryta isär stringen i Tokens, där varje token är ett ord/siffra i stringen.  ---- > CHECK
  * - Gör Tokens där du använder inheritance för bryta ner till sub-tokens för operatör samt siffror. (OOP) ---- > CHECK
  * - Få datorn att förstå att + och - är operatörer och resten är sifffror/values.  ---- >  CHECK
- * -  Lägg ihop Tokens och få ut ett svar T.ex: "two plus two" och svaret i console blir: " 4 "   ---- >  1/2 
- * Skapa UnitTests som ger "godkänt" när man har lyckats fixa ihop tillräcklig med kod för att få det att fungera.  ---- > 
+ * -  Lägg ihop Tokens och få ut ett svar T.ex: "two plus two" och svaret i console blir: " 4 "   ---- >  CHECK
+ * Skapa UnitTests som ger "godkänt" när man har lyckats fixa ihop tillräcklig med kod för att få det att fungera.  ---- > CHECK!!
  * */
 {
     public static class Parser      
@@ -66,7 +66,7 @@ namespace TeamProject
             return result;
         }
                
-           // Allt här nedan skulle man kunna skapa ett eget projekt/klass för i själva projektet och således blir de mindre kod här.ive 
+           // Allt här nedan skulle man kunna skapa ett eget projekt/klass för i själva projektet och således blir de mindre kod här.
 
          public class Token
         {
