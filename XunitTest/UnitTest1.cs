@@ -22,7 +22,7 @@ namespace XunitTest
         [Fact]
         public void Minus()
         {
-            Assert.Equal(5, Parser.Parse("10 minus 5")); //test gällande minus.
+            Assert.Equal(5, Parser.Parse("10 minus 5")); //test 
         }
 
     }

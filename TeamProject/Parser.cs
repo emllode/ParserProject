@@ -17,58 +17,61 @@ namespace TeamProject
  * Skapa UnitTests som ger "godkänt" när man har lyckats fixa ihop tillräcklig med kod för att få det att fungera.  ---- > 
  * */
 {
-    public static class Parser
-
-        
+    public static class Parser      
     {
+
+
         public static string PrettyParse(string text) //Ger ut lite resultat på consolen direkt copy av Björns intro. 
         {
             return $"{text} = {Parse(text)}";
         }
 
-    
         public static double Parse(string text)
         {
+            double result = 0;
 
             var tokens = new List<Token>();
-            foreach (string word in text.Split(" "))
+            foreach (var word in text.Split(" "))
             {
                 if (Operator.OperatorFigureOut(word))  //Vi får reda på ifall de är en operator eller siffra.
-                    tokens.Add(new Operator(word));
+                    tokens.Add(new Operator(word)); 
                 else
                     tokens.Add(new Value(word));
             }
-            var results = 0;
+
             for (int i = 1; i < tokens.Count; i++)
             {
                 Token First = tokens[0]; //första loop ger första value (först
                 Token Second = tokens[1]; //skall vara operatör (andra loop)
-                Token Third = tokens[2]; //value (tredje loop)
+                Token Third = tokens[2]; //value (tredje loop) 
 
-     
-                /*if (First is Value && Second is Operator && Third is Value)
+                if (First is Value && Second is Operator && Third is Value)
                 {
-                    if (Operator == "plus")
+                    Operator op = Second as Operator;
+                    op.First = First;
+                    op.Third = Third;
+                }
+             
+                foreach (var token in tokens)
+                {
+                    if (token is Operator)
                     {
-                        results = Value + Value;
+                        Operator op = token as Operator;
+                        result += op.Calculate();
                     }
-                    else if (Operator == "minus")
-                    {
-                        results = Value - Value;
-                    }
-                    else
-                        return 0;
-                
-                   //Calculate Value + Value or Value - Value, beroende på om operatören är plus eller minus
-                } */
+
+                }
+           
             }
-            return results; //Programmet funkar tack vare detta.
+            return result;
         }
+               
+      
+        
 
-
-         class Token
+         public class Token
         {
-            public string token;
+            protected string token;
             public Token(string text) //Förklarar vad token är, dvs stringen/texten.
             {
                 token = text;
@@ -88,26 +91,24 @@ namespace TeamProject
                         return true;
                     default:
                         return false;
-                }
-              
+                }             
             }
-            public double Equate() //få ihop ett resultat som lägger ihop Values antigen plus eller minus.
+            public double Calculate() //Funkar denna?
             {
-                if (OperatorFigureOut = "plus") //plus
-                {   
+                if (token == "plus")
+                {
                     return (First as Value).value + (Third as Value).value;
                 }
-                else if(OperatorFigureOut = "minus") // minus
+                else if (token == "minus")
                 {
                     return (First as Value).value - (Third as Value).value;
                 }
-                return 0;
+                else
+                   return 0;
             }
 
-                
-
         }
-        class Value : Token //Går genom 1 - 10 och ändrar om från string till nummer i token.
+         class Value : Token //Går genom 1 - 10 och ändrar om från string till nummer i token.
         {
             public double value;
 
@@ -145,10 +146,14 @@ namespace TeamProject
                     case "ten":
                         value = 10;
                         break;
+                    default:
+                        throw new Exception();
                 }
             }
         }
     }
+
+
 }
 
 
