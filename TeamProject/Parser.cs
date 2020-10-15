@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.ExceptionServices;
-using System.Text;
 
 namespace TeamProject
 
@@ -21,7 +17,7 @@ namespace TeamProject
     {
 
 
-        public static string PrettyParse(string text) //Ger ut lite resultat på consolen direkt copy av Björns intro. 
+        public static string PrettyParse(string text) //Denna behövs inte längre då jag skrivit egen intro kod till konsollen, men då jag har tagit in denna i min Diagram så behåller jag.
         {
             return $"{text} = {Parse(text)}";
         }
@@ -30,7 +26,8 @@ namespace TeamProject
         {
             double result = 0;
 
-            var tokens = new List<Token>();
+            //Tar isär stringen i delar efter varje space.
+            var tokens = new List<Token>(); 
             foreach (var word in text.Split(" "))
             {
                 if (Operator.OperatorFigureOut(word))  //Vi får reda på ifall de är en operator eller siffra.
@@ -38,7 +35,7 @@ namespace TeamProject
                 else
                     tokens.Add(new Value(word));
             }
-
+            //Gör så varje loop ger en Token sitt "namn" samt ifall det sker i en viss ordning så sätts calculate igång.
             for (int i = 1; i < tokens.Count; i++)
             {
                 Token First = tokens[0]; //första loop ger första value (först

@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using TeamProject;
 
@@ -16,10 +15,6 @@ namespace XunitTest
          * En bugg som jag mötte på var att alla inputs multiplicerades med 2. dvs: "two plus two" fick ett svar som 8. Detta löste jag genom att i min kod så stod det först:
          * "results += calculate;" När jag väl tog bort +  så fungerade det utmärkt. Vet inte riktigt vrför den ville multplicera men jag lyckades iaf "debugga" genom att ta bort/lägga
          * enstaka grejer.
-         * 
-         * 
-         * 
-         * 
          */
         [Fact]
         public void Plus()
@@ -36,7 +31,7 @@ namespace XunitTest
         [Fact]
         public void Minus()
         {
-            Assert.Equal(5, Parser.Parse("seven minus two")); //test 
+            Assert.Equal(5, Parser.Parse("seven minus two")); //test med subtraktion.
         }
 
     }
