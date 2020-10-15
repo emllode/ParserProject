@@ -15,8 +15,6 @@ namespace TeamProject
 {
     public static class Parser      
     {
-
-
         public static string PrettyParse(string text) //Denna behövs inte längre då jag skrivit egen intro kod till konsollen, men då jag har tagit in denna i min Diagram så behåller jag.
         {
             return $"{text} = {Parse(text)}";
@@ -78,7 +76,7 @@ namespace TeamProject
         {
             public Token First, Third;
             public Operator(string text) : base(text) { }
-            public static bool OperatorFigureOut(string text) //Switch statement för att kunna slänga in flera cases om ifall den skall utvecklas.
+            public static bool OperatorFigureOut(string text) //Switch statement för få reda på operatören. 
             {
                 switch (text)
                 {
@@ -89,7 +87,7 @@ namespace TeamProject
                         return false;
                 }             
             }
-            public double Calculate() //Addition funkar, dock verkar den automatiskt välja den oavsett om det är plus eller minus. 
+            public double Calculate() //Löser ut Value + Value samt Value - Value beroende på operatören.
             {
                 if (token == "plus")
                 {
@@ -110,7 +108,7 @@ namespace TeamProject
 
             public Value(string text) : base(text)
             {
-                switch (text)
+                switch (text) //switch statement för att ändra text siffran till ordentlig siffra. 
                 {
                     case "one":
                         value = 1;

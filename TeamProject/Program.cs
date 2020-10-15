@@ -8,10 +8,9 @@ namespace TeamProject
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, please writeout between one - ten and give us an operator plus och minus and I'll calculate it for you. \nExample: five plus five");
+            Console.WriteLine("Hello, please write two numbers between one - ten and give us an operator plus och minus inbetween the values and I'll calculate it for you. \nExample: five plus five");
             var Input = Console.ReadLine();
             Console.WriteLine(Parser.Parse(Input)); 
-
         }
 
     }   
