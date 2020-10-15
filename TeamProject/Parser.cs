@@ -92,7 +92,7 @@ namespace TeamProject
                         return false;
                 }             
             }
-            public double Calculate() //Funkar denna?
+            public double Calculate() //Addition funkar, dock verkar den automatiskt välja den oavsett om det är plus eller minus. 
             {
                 if (token == "plus")
                 {
@@ -100,7 +100,7 @@ namespace TeamProject
                 }
                 else if (token == "minus")
                 {
-                    return (First as Value).value + (Third as Value).value;
+                    return (First as Value).value - (Third as Value).value;
                 }
                 else
                    return 0;
